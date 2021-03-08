@@ -1,0 +1,41 @@
+## Fortnite Shop Section Bot
+A Fortnite shop section bot that posts to twitter as soon as they update! With several customisable options!
+
+## Example
+<p align="center">
+    <img src="https://i.imgur.com/s2RBavZ.jpg">
+</p>
+
+## Requirments
+Python
+Twitter Developer Account
+Requests (Python module)
+Tweepy (Python module)
+
+## Getting Started
+To Start off with you must download and extract the Bot.
+Then you need to open the config.py file and fill in everything required as well as having further instructions in the file. 
+You must install python if you haven't already
+You then must do:
+
+**Windows:**
+Open command prompt and enter each line!
+
+`pip install requests`
+
+`pip install tweepy` 
+
+**Linux or Ubuntu:**
+
+`pip3 install requests`
+
+`pip3 install tweepy` 
+
+Then you can run main.py!!
+
+## Project Credits
+Powered by [FN-Api](https://fn-api.com/) 
+Created by [Swift-Nite](https://twitter.com/SwiftNite)
+
+
+

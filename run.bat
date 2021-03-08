@@ -1,0 +1,2 @@
+python shop.py
+pause
