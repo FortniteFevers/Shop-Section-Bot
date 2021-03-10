@@ -32,10 +32,12 @@ def main():
                 name=i["sectionName"]
                 if i["quantity"] != 1:
                     quantity=i["quantity"]
-                    if Brackets is True:
+                    if Brackets == "True":
                         quantity=f" (X{quantity})"
+                    elif Brackets == "False":
+                        quantity=f" x{quantity}"
                     else:
-                        quantity=f" X{quantity}"
+                        quantity=f" (X{quantity})"
                 else:
                     quantity=''
                 my_file.write(f"{point}{name}{quantity}\n")
@@ -54,6 +56,3 @@ if __name__ == "__main__":
         print("Checking for section changes!")
         main()
         sleep(20)
-
- 
-
