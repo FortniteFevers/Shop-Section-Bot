@@ -14,7 +14,7 @@ class keys:
 The below section is for the customisation of the tweet itself
 '''
 class customisation:
-    Heading: str = f"Today's Shop Sections!" #this will be the text displayed in the post above the sections
+    Heading: str = "Today's Shop Sections!" #this will be the text displayed in the post above the sections
     Brackets: str = "True" #NOTE: THIS IS EITHER "True" or "False"! Default is True! True means that the quantity will have brackets around it -> (X7) false means it won't -> X7
     point: str = "-" #this is the thing that will appear before the section name, For example it would currently look like -Marvel (X7), you can change the - before the section name if you wish. NOTE: not everything works!!
 
