@@ -10,8 +10,11 @@ A Fortnite shop section bot that posts to twitter as soon as they update! With s
 
 ## Requirments
 Python
+
 Twitter Developer Account
+
 Requests (Python module)
+
 Tweepy (Python module)
 
 ## Getting Started
