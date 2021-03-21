@@ -34,8 +34,9 @@ Open command prompt and enter each line!
 Then you can run main.py!!
 
 ## Project Credits
-Powered by [FN-Api](https://fn-api.com/) 
-Created by [Swift-Nite](https://twitter.com/SwiftNite)
+Bot Powered by [FN-Api](https://fn-api.com/) 
+
+Bot Created by [Swift-Nite](https://twitter.com/SwiftNite)
 
 
 
