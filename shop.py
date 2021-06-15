@@ -3,7 +3,7 @@ import os, re, os.path
 from time import sleep
 import tweepy
 import json
-from config import keys, customisation
+from config import keys, customisation, language, botdelay
 consumer_key = keys.consumer_key
 consumer_secret_key = keys.consumer_secret_key
 access_token = keys.access_token
@@ -11,52 +11,49 @@ access_token_secret = keys.access_token_secret
 Heading = customisation.Heading
 Brackets = customisation.Brackets
 point = customisation.point
-print("\n\nWelcome to Swift-Nite's Shop Section Bot!\n\n")
+language = language.Language
+BotDelay = botdelay.SleepDelay
+print(f"\n\nWelcome to Swift-Nite's Shop Section Bot!\nYour Delay is {BotDelay} seconds.\n\n")
 
 def main():
-    try:
-        auth = tweepy.OAuthHandler(consumer_key, consumer_secret_key)
-        auth.set_access_token(access_token, access_token_secret)
-        api = tweepy.API(auth)
-        response = get('https://fn-api.com/api/shop_categories')
+    auth = tweepy.OAuthHandler(consumer_key, consumer_secret_key)
+    auth.set_access_token(access_token, access_token_secret)
+    api = tweepy.API(auth)
+    count = 1
+    apiurl = f'https://fn-api.com/api/shop/sections?lang={language}'
+
+    response = get(apiurl)
+    newsData = response.json()['data']['hash']
+
+    while 1:
+        response = get(apiurl)
         if response:
-            main = get('https://fn-api.com/api/shop_categories')
-            stamp = main.json()['timestamp']
-            res = main.json()['shopCategories']
-            with open('cache.json', 'r') as fnapi_file:
-                old = json.load(fnapi_file)
-            if stamp != old:
-                print("changes detected!")
-                my_file = open(f"sections.txt","w+")
-                my_file.write(f"{Heading}\n\n")
-                for i in res:
-                    name=i["sectionName"]
-                    if i["quantity"] != 1:
-                        quantity=i["quantity"]
-                        if Brackets == "True":
-                            quantity=f" (X{quantity})"
-                        elif Brackets == "False":
-                            quantity=f" X{quantity}"
-                        else:
-                            quantity=f" (X{quantity})"
-                    else:
-                        quantity=''
-                    my_file.write(f"{point}{name}{quantity}\n")
-                my_file = open(f"sections.txt","r")
-                file_contents = my_file.read()
-                print (file_contents)
-                api.update_status(f"{file_contents}")
-                print("Posted!")
-                my_file.close()
-                with open('cache.json', 'w') as file:
-                    json.dump(stamp, file, indent=3)
-        else:
-            print("error")
-    except:
-        print("error")
+            newsDataLoop = response.json()['data']['hash']
+            print("Checking for change in the Shop Sections... ("+str(count)+")")
+            count = count + 1
             
-if __name__ == "__main__":
-    while True:
-        print("Checking for section changes!")
-        main()
-        sleep(20)
+            if newsData != newsDataLoop:
+
+                print('\nShop sections have changed!')
+                sleep(3)
+                response = get(f'https://fn-api.com/api/shop/sections?lang={language}')
+                ss = response.json()['data']['sections']
+                sections = ""
+
+                for i in ss:
+                    #print(f'{i["sectionName"]} - (x{i["quantity"]})\n')
+                    sections += f'{i["name"]} - (x{i["quantity"]})\n'
+
+                print(sections)
+
+                print('\nTweeting out the current shop sections...')
+                
+                api.update_status(f'#Fortnite Shop Sections Update:\n\n'+str(sections))
+                print('Tweeted out the shop sections!')
+                main()
+        else:
+            print("FAILED TO GRAB SHOP SECTIONS DATA: URL DOWN")
+
+        sleep(BotDelay)
+
+main()
