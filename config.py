@@ -18,6 +18,12 @@ class customisation:
     Brackets: str = "True" #NOTE: THIS IS EITHER "True" or "False"! Default is True! True means that the quantity will have brackets around it -> (X7) false means it won't -> X7
     point: str = "-" #this is the thing that will appear before the section name, For example it would currently look like -Marvel (X7), you can change the - before the section name if you wish. NOTE: not everything works!!
 
+class language:
+    Language: str = "en" # Will determine what language the program uses. Current languages are ar / de / en / es / es-419 / fr / it / ja / ko / pl / pt-BR / ru / tr
+
+class botdelay:
+    SleepDelay: str = 15 # Amount of seconds the bot delays for a check
+
 '''
 If you have any issues please message me on discord or twitter and I will respond as quick as possible!!
 Twitter: @SwiftNite
